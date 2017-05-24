@@ -1,0 +1,181 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      5007,        171]
+NotebookOptionsPosition[      4571,        151]
+NotebookOutlinePosition[      4911,        166]
+CellTagsIndexPosition[      4868,        163]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Det", "[", GridBox[{
+     {"1", "0", "0", "0", "0", 
+      RowBox[{"-", "1"}]},
+     {"0", "2", "0", "0", "0", 
+      RowBox[{"I", " ", "k"}]},
+     {
+      RowBox[{"Cos", " ", "[", 
+       RowBox[{"k", " ", "b1"}], "]"}], 
+      RowBox[{
+       RowBox[{"Sin", " ", "[", 
+        RowBox[{"k", " ", "b1"}], "]"}], "/", "k"}], 
+      RowBox[{"-", "1"}], "0", "0", "0"},
+     {
+      RowBox[{"k", " ", 
+       RowBox[{"Sin", " ", "[", 
+        RowBox[{"k", " ", "b1"}], "]"}]}], 
+      RowBox[{"-", 
+       RowBox[{"Cos", " ", "[", 
+        RowBox[{"k", " ", "b1"}], "]"}]}], "0", "2", "0", "0"},
+     {"0", "0", 
+      RowBox[{"Cos", " ", "[", 
+       RowBox[{"k", " ", "b2"}], "]"}], 
+      RowBox[{
+       RowBox[{"Sin", " ", "[", 
+        RowBox[{"k", " ", "b2"}], "]"}], "/", "k"}], 
+      RowBox[{"-", "1"}], "0"},
+     {"0", "0", 
+      RowBox[{"k", " ", 
+       RowBox[{"Sin", " ", "[", 
+        RowBox[{"k", " ", "b2"}], "]"}]}], 
+      RowBox[{"-", " ", 
+       RowBox[{"Cos", " ", "[", 
+        RowBox[{"k", " ", "b2"}], "]"}]}], 
+      RowBox[{"2", " ", "I", " ", "k"}], "0"}
+    }], "]"}], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.60233223307962*^9, 3.6023324798311377`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"9", " ", "\[ImaginaryI]", " ", "k", " ", 
+   RowBox[{"Cos", "[", 
+    RowBox[{"b1", " ", "k"}], "]"}], " ", 
+   RowBox[{"Cos", "[", 
+    RowBox[{"b2", " ", "k"}], "]"}]}], "+", 
+  RowBox[{"6", " ", "k", " ", 
+   RowBox[{"Cos", "[", 
+    RowBox[{"b2", " ", "k"}], "]"}], " ", 
+   RowBox[{"Sin", "[", 
+    RowBox[{"b1", " ", "k"}], "]"}]}], "+", 
+  RowBox[{"6", " ", "k", " ", 
+   RowBox[{"Cos", "[", 
+    RowBox[{"b1", " ", "k"}], "]"}], " ", 
+   RowBox[{"Sin", "[", 
+    RowBox[{"b2", " ", "k"}], "]"}]}], "-", 
+  RowBox[{"6", " ", "\[ImaginaryI]", " ", "k", " ", 
+   RowBox[{"Sin", "[", 
+    RowBox[{"b1", " ", "k"}], "]"}], " ", 
+   RowBox[{"Sin", "[", 
+    RowBox[{"b2", " ", "k"}], "]"}]}]}]], "Output",
+ CellChangeTimes->{3.602332483628635*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Det", "[", GridBox[{
+    {"1", "0", "0", "0", "0", "1"},
+    {"0", "2", "0", "0", "0", 
+     RowBox[{"I", " ", "k"}]},
+    {
+     RowBox[{"Cos", " ", "[", 
+      RowBox[{"k", " ", "b1"}], "]"}], 
+     RowBox[{
+      RowBox[{"Sin", " ", "[", 
+       RowBox[{"k", " ", "b1"}], "]"}], "/", "k"}], 
+     RowBox[{"-", "1"}], "0", "0", "0"},
+    {
+     RowBox[{"k", " ", 
+      RowBox[{"Sin", " ", "[", 
+       RowBox[{"k", " ", "b1"}], "]"}]}], 
+     RowBox[{"-", 
+      RowBox[{"Cos", " ", "[", 
+       RowBox[{"k", " ", "b1"}], "]"}]}], "0", "2", "0", "0"},
+    {"0", "0", 
+     RowBox[{"Cos", " ", "[", 
+      RowBox[{"k", " ", "b2"}], "]"}], 
+     RowBox[{
+      RowBox[{"Sin", " ", "[", 
+       RowBox[{"k", " ", "b2"}], "]"}], "/", "k"}], 
+     RowBox[{"-", "1"}], "0"},
+    {"0", "0", 
+     RowBox[{"k", " ", 
+      RowBox[{"Sin", " ", "[", 
+       RowBox[{"k", " ", "b2"}], "]"}]}], 
+     RowBox[{"-", " ", 
+      RowBox[{"Cos", " ", "[", 
+       RowBox[{"k", " ", "b2"}], "]"}]}], 
+     RowBox[{"2", " ", "I", " ", "k"}], "0"}
+   }], "]"}]], "Input",
+ CellChangeTimes->{3.602332541208548*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"-", "7"}], " ", "\[ImaginaryI]", " ", "k", " ", 
+   RowBox[{"Cos", "[", 
+    RowBox[{"b1", " ", "k"}], "]"}], " ", 
+   RowBox[{"Cos", "[", 
+    RowBox[{"b2", " ", "k"}], "]"}]}], "+", 
+  RowBox[{"2", " ", "k", " ", 
+   RowBox[{"Cos", "[", 
+    RowBox[{"b2", " ", "k"}], "]"}], " ", 
+   RowBox[{"Sin", "[", 
+    RowBox[{"b1", " ", "k"}], "]"}]}], "-", 
+  RowBox[{"2", " ", "k", " ", 
+   RowBox[{"Cos", "[", 
+    RowBox[{"b1", " ", "k"}], "]"}], " ", 
+   RowBox[{"Sin", "[", 
+    RowBox[{"b2", " ", "k"}], "]"}]}], "+", 
+  RowBox[{"2", " ", "\[ImaginaryI]", " ", "k", " ", 
+   RowBox[{"Sin", "[", 
+    RowBox[{"b1", " ", "k"}], "]"}], " ", 
+   RowBox[{"Sin", "[", 
+    RowBox[{"b2", " ", "k"}], "]"}]}]}]], "Output",
+ CellChangeTimes->{3.6023325621615353`*^9}]
+}, Open  ]]
+},
+WindowSize->{640, 750},
+WindowMargins->{{12, Automatic}, {Automatic, 24}},
+FrontEndVersion->"7.0 for Mac OS X x86 (32-bit) (February 18, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 1236, 37, 139, "Input"],
+Cell[1806, 61, 784, 22, 43, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2627, 88, 1120, 35, 113, "Input"],
+Cell[3750, 125, 805, 23, 43, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

@@ -1,0 +1,43 @@
+\begin{tikzpicture}[vertex/.style={draw,circle,minimum size=1.3mm,inner sep=0pt,outer sep=0pt,fill=black}]
+
+  \def\snowflake#1#2#3{
+    \newcount\gen
+    \pgfmathsetmacro{\M}{#1}
+    \pgfmathsetmacro{\q}{#2}
+    \pgfmathsetmacro{\lw}{0.6}
+    \pgfmathsetmacro{\maxgen}{#3}
+    \pgfmathsetmacro{\a}{360/(\M+1)}
+    \draw[line width=0.3+\lw] (-1, 0) -- node[above] {$e_0$} (0, 0);
+    \node[scale=0.3+\lw] at (0.07, 0) {$v_0$};
+    % \node at (0.08, 0) {$v_0$};
+    \node[vertex] at (-1, 0) {};
+    \node[vertex] at (0, 0) {};
+    \edef\edgeindex{}
+    \def\doit##1##2##3##4##5{
+      \gen=##4
+      \ifnum\the\gen<\maxgen {
+        \advance\gen by 1
+        \edef\edgeindex{\edgeindex ##5}
+        \pgfmathsetmacro{\prevx}{##1}
+        \pgfmathsetmacro{\prevy}{##2}
+        % \node[scale=1] at ({\prevx}, {\prevy}) {$v_{\edgeindex}$};
+        \foreach \i in {1,...,\M} {
+          \pgfmathsetmacro{\angle}{##3+180-\a*\i}
+          \pgfmathsetmacro{\nextx}{\prevx + \q^\gen*cos(\angle)}
+          \pgfmathsetmacro{\nexty}{\prevy + \q^\gen*sin(\angle)}
+          \draw[line width=0.3+\lw^\gen] ({\prevx}, {\prevy}) -- ({\nextx}, {\nexty});
+          \node[scale=1.5*\lw^\gen] at ({(2*\prevx+\q^\gen*cos(\angle-15))/2}, {(2*\prevy+\q^\gen*sin(\angle-15))/2}) {$e_{\edgeindex\i}$};
+          \node[scale=1.5*\lw^(\gen+1)] at ({(\prevx+\q^\gen*1.09*cos(\angle))}, {(\prevy+\q^\gen*1.09*sin(\angle))}) {$v_{\edgeindex\i}$};
+          \node[vertex,scale=1.5*\lw^\gen] at ({\nextx}, {\nexty}) {};
+          % \node[scale=1.5*\lw^\gen] at ({\nextx+(\nextx-\prevx)*0.15}, {\nexty+(\nexty-\prevy)*0.15}) {$v_{\edgeindex\i}$};
+          \doit{\nextx}{\nexty}{\angle}{\the\gen}{\i}
+        }
+      }
+      \fi
+    }
+    \doit{0}{0}{0}{0}{}
+  }
+
+  \snowflake{4}{0.46}{2}
+
+\end{tikzpicture}

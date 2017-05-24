@@ -1,0 +1,62 @@
+# Welcome
+
+Welcome to the presentation of my Bachelor's thesis on the topic of Quantum Snowflakes. My name is Viktor Qvarfordt and I have been working on this project under the supervision of professor Pavel Kurasov from the Department of Mathematics.
+
+Before we get started, I would like to encourage all of you to ask questions during the talk if there is anything that is not clear. It should be noted that after the presentation there will be time for further questions and discussions.
+
+
+# Table of Contents
+
+The outline will be as follows.
+- First I will give a rather informal discussion of the setting and the problem at hand, in order to get some intuition.
+- Next, I will give a short introduction to the general theory of quantum graphs.
+- Finally, we will discuss and show results for a particular class of Quantum Graphs, namely the Quantum Snowflake Graphs. (Which are the central objects of study in this thesis.)
+- Our main objective will be to characterize the scattering properties of the Quantum Snowflake.
+
+
+# Introduction
+
+Put shortly, we want to determine how much of a wave, that has been sent into the Quantum Snowflake, gets reflected, and how much gets transmitted, or so to say; absorbed, in this infinite structure. However, in order to do so, we must first build up a framework which enables us to talk about such objects in a precise manner.
+
+Intuitively, it is a good viewpoint to think of quantum graphs as a collection of thin (approximately one-dimensional) metal wires, which we call edges, connected at points that we call vertices. This resembles a metric graph.
+
+Another way to think of quantum graphs, which was also historically the first case where quantum graphs where considered, is as a model for free electrons in molecules.
+
+# Quantum Graphs
+
+Formally, we define Quantum Graphs as follows ...
+
+We shall now go shortly through these three concepts
+
+## Matching conditions
+
+This should be understood as taking the derivative in the direction into the edge, out from the vertex given by the end-point $x_j$. This is a useful concept since it allows us to disregard the direction of parametrization of the edge.
+
+of a function $f$ on a metric graph $\Gamma$ at an end-point $x_j$ of an edge is defined by the derivative taken in the direction out from the vertex, into the edge:
+
+Taking the derivative in the direction out from the vertex, into the edge.
+
+
+## Scattering from 2-generation radial tree
+
+Several rather curios results follow from this, for instance ...
+
+## Snowflake preliminaries
+
+Our aim will be to calculate the reflection from certain types of radial quan-
+tum tree graph that have an infinite number of generations yet finite depth.
+Recall that a radial quantum tree graph is characterized by that every prop-
+erty of the graph depends only on the radial distance to the root of the
+tree, specifically all edges in the same generation have the same length and
+all vertices in the same generation have the same branching number. This
+gives rise to a rotational symmetry: the graph is invariant under discrete
+rotation (more specifically permutation, see section 3.3) of edges in the same
+generation around each branching point. This symmetry will be exploited to
+collapse the radial quantum tree graph with standard matching conditions to
+a quantum graph consisting of joined intervals with special matching condi-
+tions at the vertices, as a means of better understanding scattering properties
+of the graph.
+
+## Snowflake definition
+
+In particular this gives $mk$ edges in the $k$:th generation.

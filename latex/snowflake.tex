@@ -1,0 +1,204 @@
+\documentclass[a4paper,11pt]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nottoc]{tocbibind}
+\usepackage{caption}
+\usepackage[labelformat=simple]{subcaption}
+\renewcommand\thesubfigure{(\alph{subfigure})}
+
+\usepackage{titlesec}
+
+\usepackage{fancyhdr}
+
+
+% Make section text look nice in header.
+% (Only needed for article, not report.)
+\makeatletter
+\newcommand{\rightorleftmark}{%
+  \begingroup\protected@edef\x{\rightmark}%
+  \ifx\x\@empty
+    \endgroup\leftmark
+  \else
+    \endgroup\rightmark
+  \fi}
+\makeatother
+
+% hline in the footer, just like header.
+\renewcommand{\footrulewidth}{0.4pt}
+
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection~~~{#1}}{}}
+\fancyhf{}
+\lhead{\textsl{\rightorleftmark}}
+\rhead{\thepage}
+\lfoot{\textsc{Quantum Snowflake}}
+\rfoot{\textsl{Viktor Qvarfordt}}
+% \fancypagestyle{plain}{%
+%   \fancyhf{}%
+%   \renewcommand{\headrulewidth}{0pt}%
+% }
+
+\usepackage{mathtools,amssymb,amsthm,enumerate,cleveref}
+
+\usepackage{tikz,tikzscale}
+\usetikzlibrary{calc}
+
+% Set up thm, def, etc.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+% \declaretheorem[name=Example,]{Ex}
+\newtheorem{example}{Example}[chapter]
+\AtEndEnvironment{example}{\hspace*{0pt}\hfill\ensuremath{\diamondsuit}}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[chapter]
+
+\numberwithin{equation}{chapter}
+
+% \usepackage{showlabels}
+
+\newcommand{\exclude}[1]{}
+
+%% custom commands
+\newcommand{\Dom}{\operatorname{Dom}}
+\newcommand{\Ran}{\operatorname{Ran}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\Norm}[1]{\lVert#1\rVert}
+\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
+\newcommand{\ip}[2]{\ensuremath{\langle #1, #2 \rangle}}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\renewcommand{\H}{\mathcal{H}}
+
+\newcommand{\D}[2]{\frac{d#1}{d#2}}
+\newcommand{\pD}[2]{\frac{\partial#1}{\partial#2}}
+
+\newcommand{\Dn}[3]{\frac{d^#3#1}{d#2^#3}}
+\newcommand{\pDn}[3]{\frac{\partial^#3#1}{\partial#2^#3}}
+
+\newcommand{\Dop}[1]{\frac{d}{d#1}}
+\newcommand{\pDop}[1]{\frac{\partial}{\partial#1}}
+
+\newcommand{\Dopn}[2]{\frac{d^#2}{d#1^#2}}
+\newcommand{\pDopn}[2]{\frac{\partial^#2}{\partial#1^#2}}
+
+
+\newcommand{\g}[1]{\left(#1\right)}
+
+
+\title{Quantum Snowflake}
+\author{Viktor Qvarfordt}
+
+
+\begin{document}
+
+\begin{titlepage}
+  \thispagestyle{empty}
+  % \null\vskip{-2em}
+  % \noindent \large{\textbf{Stockholm University \hfill Fysikum}}
+  % \vskip 7em
+  \centering
+  \null
+  \vspace{3cm}
+  {\huge\bf Quantum Snowflake} \\
+  \vspace{1cm}
+  {\Large\sl Viktor Qvarfordt} \\
+  \vspace{0.5cm}
+  {\Large May 2015} \\
+  \vspace{4cm}
+  {\Large Bachelor’s Thesis --- 15 ECTS} \\
+  \vspace{0.5cm}
+  \Large
+  Supervisor: Pavel Kurasov \\
+  \vspace{5cm}
+  Department of Mathematics, Department of Physics \\
+  \vspace{0.5cm}
+  Stockholm University \\
+  \vfill
+  {\tiny Revised \today}
+  \vspace{-1cm}
+\end{titlepage}
+
+\begin{abstract}
+  \input{content/abstract}
+\end{abstract}
+% \thispagestyle{empty}
+\clearpage
+
+% \renewcommand{\abstractname}{Acknowledgments}
+% \begin{abstract}
+%   \input{content/acknowledgments}
+% \end{abstract}
+% \thispagestyle{empty}
+% \newpage
+
+% \begin{figure}
+%   \centering
+%   \includegraphics[angle=90,width=\textwidth]{img/{snowflake_4_0.35_7_4_0.5}.pdf}
+% \end{figure}
+
+\fancypagestyle{snowflake}{\lhead{\textsl{Illustration of a quantum snowflake}}}
+\thispagestyle{snowflake}
+\setcounter{page}{3}
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{img/{snowflake_2_0.6_13_4_0.8}.pdf}
+\end{figure}
+
+\clearpage
+
+{
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename~\thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-50pt}{25pt}
+\tableofcontents
+\clearpage
+}
+
+\chapter{Introduction}\label{sec: physical interpretation}\label{sec: introduction}
+\input{content/introduction}
+\clearpage
+
+\fancypagestyle{automatic}{\lhead{\textsl{\rightorleftmark}}}
+\pagestyle{automatic}
+
+\chapter{Defining quantum graphs}\label{sec: defining quantum graphs}
+\input{content/quantum_graphs}
+\clearpage
+
+\chapter{Properties of quantum graphs}\label{sec: properties}
+\input{content/properties_of_quantum_graphs}
+\clearpage
+
+\chapter{The snowflake graph}\label{sec: snowflake}
+\input{content/snowflake}
+\clearpage
+
+\fancypagestyle{conclusion}{\lhead{\textsl{Conclusion}}}
+\pagestyle{conclusion}
+\chapter{Conclusion}\label{sec: conclusion}
+\input{content/conclusion}
+\clearpage
+
+\thispagestyle{snowflake}
+\begin{figure}
+  \centering
+  \includegraphics[angle=90,width=\textwidth]{img/{snowflake_4_0.35_7_4_0.5}.pdf}
+\end{figure}
+
+\fancypagestyle{bibliography}{\lhead{\textsl{Bibliography}}}
+\pagestyle{bibliography}
+\input{content/bibliography}
+
+\end{document}

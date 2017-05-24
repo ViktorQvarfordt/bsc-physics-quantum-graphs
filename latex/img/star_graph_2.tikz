@@ -1,0 +1,11 @@
+\begin{tikzpicture}[vertex/.style={draw,circle,minimum size=1.3mm,inner sep=0pt,outer sep=0pt,fill=black}, line width=1]
+  \pgfmathsetmacro{\q}{0.5}
+  \node[vertex] at (0,0) {};
+  \node[vertex] at (-1,0) {};
+  \draw (-1,0) -- node[above] {$e_0$} (0,0);
+  \foreach \a [count=\i] in {180+4*360/5, 180+3*360/5, 180+2*360/5, 180+1*360/5} {
+    \node[vertex] at ({\q*cos(\a)},{\q*sin(\a)}) (dummylabel) {};
+    \node at ({\q/1.6*cos(\a-12)},{\q/1.6*sin(\a-12)}) {$e_{\i}$};
+    \draw (0,0) -- (dummylabel);
+  }
+\end{tikzpicture}

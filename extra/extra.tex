@@ -1,0 +1,23 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry,amsmath}
+\usepackage[hidelinks]{hyperref}
+
+\begin{document}
+
+\title{Additional Notes on Snowflake Graphs}
+\maketitle
+
+\section{Radial tree with constant branching number $M$}
+
+Let $\ell_i$ be the length of edges in generation $i$, let $b_i$ be the branching number of generation $i$ and let $R = R(\vec{m}, \vec{\ell}, k)$ be the reflection on the root of the radial tree.
+
+{\bf Question:} When is $R = 0$? {\it Hypothesis:} If and only if $\vec{\ell} = (\ell, \ell, \ldots)$.
+
+Furthermore, we hypothesize that the RQG with $\vec{\ell} = (\ell, \beta\ell)$ has root reflection equal to that of the RQG with $\vec{\ell} = (\ell, \ell)$ and $L = -c\frac{d^2}{dx^2}$, where $c>0$ is a parameter depending on $\beta$.
+
+Test the hypothesis for $N=3$, with $1 < b_i < 10$, and $\ell_1$ and $\ell_2$ as free parameters; we can normalize so that $\ell_1 = 1$. This gives us a finite number of functions in one variable, $\ell_2$, for which the hypothesis is easy to verify.
+
+\end{document}

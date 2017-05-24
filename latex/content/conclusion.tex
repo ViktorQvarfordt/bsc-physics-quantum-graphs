@@ -1,0 +1,91 @@
+In \cref{sec: introduction} we gave a broad background to the physics that underpin the motivation for studying quantum graphs. In \cref{sec: defining quantum graphs} we defined quantum graphs and discussed the three components: metric graphs, differential operators and matching conditions. In \cref{sec: properties} we studied various properties of quantum graphs that formed the basis for \cref{sec: snowflake}, including scattering phenomena, exploitation of graph symmetries and the introduction of radial quantum tree graphs as generalizations of star graphs.
+
+Scattering properties of radial quantum tree graphs with two generations where studied via a direct method of calculating the scattering amplitude, found to be given by
+\[
+  R_2(k) = -\frac{(b_1-1) (b_2+1)+(b_1+1) (b_2-1) e^{2 i k \ell}}{(b_1+1) (b_2+1)+(b_1-1) (b_2-1) e^{2 i k \ell}}
+\]
+for an incoming wave with energy $\lambda = k^2$.
+Already for this simple graph interesting results where found: The above expression is invariant when interchanging the branching numbers $b_1$ and $b_2$, showing that the corresponding two different graphs exhibit identical scattering properties and can thus not be distinguished by external measurements of the graph.
+
+The simple method of calculating the reflection amplitude proved to be limited when generalizing to radial graphs of higher number of generations. For this reason the snowflake graph was introduced as the central object of study in \cref{sec: snowflake}.
+
+The quantum snowflake is defined as a radial quantum tree graph with infinite number of generations, where all branching numbers equal $m$, and the length of edges in generation $n$ are given by $\ell\beta^n$ for constants $\ell$ and $\beta$. By construction the snowflake graph exhibits self-similarity and has a finite depth $\ell/(1-\beta)$ if $\beta < 1$.
+
+By exploiting the rotational symmetry and self-similarity of the snowflake graph, we decomposed every eigenfunction $f$ to the Laplace operator $L=-\Dopn{x}{2}$ on the graph into $m$ quasi rotation invariant components
+\[
+  f^n_j = \frac{1}{m} \sum_{k=0}^{m-1} z^{-nk} f_{j+1}, \quad j=1,2,\ldots,m.
+\]
+$f_j$ denotes the restriction of $f$ to the $j$:th edge and $z=e^{\frac{2\pi}{m}i}$ is the first eigenvalue to the rotation operator $R: e_j \mapsto e_{j+1}$.
+The functions $f^n_j$ are eigenfunctions to the rotation operator $R$ and sum to $f_j = \sum_{n=0}^{m-1} f_j^n$.
+
+Based on this decomposition of eigenfunctions on the snowflake graph $\Gamma$ we developed a  method for transforming $\Gamma$ with standard matching conditions into a line graph $\widetilde{\Gamma}$ with snowflake matching conditions. At vertex $v$ we have the conditions
+\begin{align*}
+  \!\begin{array}{c}
+    \Gamma \\
+    \text{standard} \\
+    \text{conditions}
+  \end{array}\!\!\!:
+  \begin{dcases}
+    f(x) = f(y) \quad \forall x \in v \\
+    \sum_{x\in v}  \partial f(x) = 0
+  \end{dcases}
+  &&
+  \!\!\!\!\begin{array}{c}
+    \widetilde{\Gamma} \\
+    \text{snowflake} \\
+    \text{conditions}
+  \end{array}\!\!\!:
+  \begin{dcases}
+    f_0(v) = \frac{1}{\sqrt{m}} f_1(v) \\
+    \partial f_0(v) + \sqrt{m} \partial f_1(v) = 0.
+  \end{dcases}
+\end{align*}
+Under these conditions the two graphs $\Gamma$ and $\widetilde{\Gamma}$ have identical scattering properties, allowing us to consider only the simpler graph $\widetilde{\Gamma}$.
+
+For $\widetilde{\Gamma}$ we developed a method for combining several vertices into one vertex, which allowed us characterize the internal scattering of the snowflake graph. From this the total reflection $R_n(k) = S_{ll,n}(k)$ of a snowflake graph with $n$ generations was found to be given recursively by
+\begin{align*}
+  \left\lbrace\!
+  \begin{aligned}
+    S_{ll,1} &= \frac{1-m}{1+m} \\
+    S_{rl,1} &= \frac{2\sqrt{m}}{1+m} \\
+    S_{rr,1} &= -S_{ll,1} \\
+    S_{lr,1} &= S_{rl,1}
+  \end{aligned}\right.
+  &&
+  \left\lbrace\!
+  \begin{aligned}
+    S_{ll,n+1} &= S_{ll,n} + \frac{e^{2ik\ell_n} S_{rl,n} S_{ll,1} S_{lr,n}}{1 - e^{2ik\ell_n} S_{rr,n} S_{ll,1}} \\
+    S_{rl,n+1} &= \frac{e^{ik\ell_n} S_{rl,n} S_{rl,1}}{1 - e^{2ik\ell_n} S_{ll,1} S_{rr,n}} \\
+    S_{rr,n+1} &= S_{rr,1} + \frac{e^{2ik\ell_n} S_{lr,1} S_{rr,n} S_{rl,1}}{1 - e^{2ik\ell_n} S_{ll,1} S_{rr,n}} \\
+    S_{lr,n+1} &= \frac{e^{ik\ell_n} S_{lr,1}S_{lr,n}}{1 - e^{2ik\ell_n} S_{rr,n} S_{ll,1}}
+  \end{aligned}\right.
+\end{align*}
+where $S_{ij_n}, i,j=r,l$ denotes the transition amplitude from $j$ to $i$ for a combined vertex consisting of $n$ ordinary vertices.
+
+This allowed us to formulate several results: For any snowflake graph with $n$ generations and branching number $m$, the reflection of an incoming wave with zero energy is given by
+\[
+  S_{ll,n}(0) = \frac{1-m^n}{1+m^n} = \frac{2}{m^n+1} - 1,
+\]
+precisely that of a star graph with degree $m^n+1$. That is, for very low energies the incoming wave does not ``see'' the inner edges.
+
+We also found that if the branching number $m$ increases, then also the reflection probability $\abs{S_{ll,n}(k)}^2$ increases, except for the case when it is 0 or~1.
+
+Furthermore we showed that the the periodic snowflake graph, i.e.\ with $\beta=1$, behaves as a crystalline material and admits a periodic band gap structure. If the periodic snowflake graph has edge lengths $\ell$ and branching number $m$, then only energies $\lambda = k^2$ satisfying
+\[
+  \abs{\cos k\ell} < \frac{2\sqrt{m}}{m+1}
+\]
+are realizable in the graph. Incoming waves with energies not satisfying this inequality are totally reflected.
+
+However, a complete characterization of the reflection amplitude $R(k) = \lim_{n\to\infty} S_{ll,n}$ for arbitrary $0<\beta<1$ could no be found. In general $R(k)$ is not periodic and appears to vary very irregularly with $k$.
+
+Although the recursive expression for $R_n$ in principle determines the reflection amplitude in the general case, it is very difficult to work with. Improvements can be made to the method of combining vertices, the fact that the graph is self-similar is currently not being used. The ambition should be to find a closed form expression for $R_{n,m,\beta}(k)$.
+
+Furthermore it would be interesting to study the average reflection
+\[
+  \frac{1}{k_1} \int_{0}^{k_1} R(k) \, dk.
+\]
+From a physical or practical point of view this particularly interesting: It is generally not possible to have precise control of the energy of the wave that is sent to the graph, most often one has waves from a range of energies. The numerically calculated result
+\[
+  \frac{1}{2\pi\ell} \int_{0}^{2\pi\ell} \abs{R(k)}^2 dk = \frac{m-1}{m+1} = \abs{R_1(0)}
+\]
+for $n\to\infty$, $\beta=1$ and branching number $m$, indicates that strong regularity can be found for the average reflection.

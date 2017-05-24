@@ -1,0 +1,399 @@
+This section is devoted to defining and discussing quantum graphs and the components that it consists of. A more thorough introduction and characterization of quantum graphs can be found in the survey article \cite{introduction and brief survey} or the books \cite{pavel book} and \cite{berkolaiko kuchment book}. We begin by defining exactly what is meant by a quantum graph. The meaning of the terms will be explained in the following sections.
+
+\begin{definition}
+  A \emph{quantum graph} is a triple $(\Gamma, L, \text{MC})$, where
+  \begin{itemize}
+    \item $\Gamma$ is a \emph{metric graph},
+    \item $L$ is a \emph{differential expression} defined on a function space on $\Gamma$, and
+    \item MC is a set of equations, \emph{matching conditions}, relating the limit values  of the functions defined on the edges of $\Gamma$.
+  \end{itemize}
+\end{definition}
+
+Similar to how, in abstract algebra, one talks about a group $(G,*)$ by referring to its underlying set $G$, we will often talk about a given quantum graph $(\Gamma, L, \text{MC})$ by referring to the metric graph $\Gamma$, often called the \emph{underlying (metric) graph}.
+
+Initially the quantum graph is only given a differential expression $L$. Next, one defines a corresponding differential operator whose action is given by the differential expression, furthermore one must determine the domain of the operator, so that the operator satisfies desired properties such as being self-adjoint. The domain of the operator is not known \textit{a priori}, therefore we only include a differential expression in the definition of a quantum graph.
+% Usually one chooses $L$ so that the eigenvalue problem $L\psi=\lambda\psi$ is the Schrödinger equation, or some other equation of interest.
+The three components in the definition are dependent of each other in the sense that one often defines the underlying metric graph from the geometry of the problem. The differential operator is then defined as acting on functions defined on the edges of this graph, satisfying the matching conditions to ensure self-adjointness and other properties of interest.
+
+As we will see in \cref{sec: snowflake}, two graphs of different geometry, i.e.\ having different underlying metric graphs, can be equivalent by a certain choice of matching conditions for the ``geometrically altered'' graph. This turns out to be a powerful method of simplifying studies of more complicated graphs.
+
+It is natural to begin our discussion with metric graphs, which we now proceed to define.
+
+
+
+\section{Metric graphs}\label{sec: metric graphs}
+
+In discrete mathematics, combinatorial graphs are defined as vertices connected to each other through edges. The edges merely reflect the relation between vertices, which are the main objects of the graph. Metric graphs can then be defined as combinatorial graphs with weights assigned to each vertex, but it is useful to change the point of view slightly.
+
+In contrast to combinatorial graphs, the main objects of metric graphs are the edges, while the vertices merely reflect the relation between edges. Let us now formally define a metric graph, note how we still have vertices and edges, but they play a very different role.
+
+\begin{definition}
+  A \emph{metric graph} is a tuple $(E,V)$ where
+  \begin{itemize}
+    \item $E = \{e_n\}_{n=1}^N$ is a set of intervals $[x_{2n-1}, x_{2n}] \subset \R$ called \emph{edges}, where $x_{2n-1} < x_{2n}$. At least one end-point of each interval must be finite. If both end-points are finite then the edge is called compact, otherwise it is called semi-infinite.
+    \item $V = \{v_m\}_{m=1}^M$ is a partition of the set of all end-points of edges in $E$, each element in $V$ is called a \emph{vertex}. End-points belonging to the same vertex (partition) are identified as the same point.
+  \end{itemize}
+\end{definition}
+
+It is this construction of the vertices that defines the connection between the otherwise completely independent edges in $E$. The partition of endpoints into vertices, or the equivalence relation giving rise to it, can thus be viewed as defining the geometry of the graph, or vice versa.
+
+It is useful to think of metric graphs as intervals of the real line, being the edges, joined together at some of their end-points, being the vertices. The physical interpretation could then be thin metal wires welded together at some points, we will come back to this after we have introduced the differential operator acting on the graph.
+
+Similar to combinatorial graphs, we define the \emph{degree} $\deg v_m$ of a vertex $v_m$ to be the number of edges connected through this vertex. Equivalently it is the number of edges containing the vertex, i.e.\ the degree is simply $\abs{v_m}$, the number of end-points belonging to the vertex.
+
+A metric graph $\Gamma$ is said to be connected if there exists a continuous path in $\Gamma$ connecting $x$ and $y$ for every $x, y \in \Gamma$. If this does not hold for every $x$ and $y$ the graph is considered to be split into a number of disconnected subgraphs or connected components, each being a connected graph containing at least one edge. If a graph has several connected components, they can be considered to be completely independent graphs, in this text we shall only be interested in connected graphs.
+
+Unlike combinatorial graphs, edges $e_n$ in metric graphs have the notion of length, simply defined as $\ell_n = x_{2n} - x_{2n-1}$. From this we can define the total length of a graph as $\mathcal{L} = \sum_{n=1}^{N} l_n$. We also introduce a distance $d(x, y)$ between any two points $x$ and $y$ in a connected metric graph as the length of the shortest path between $x$ and $y$.
+
+We now define what is meant by a function being defined on the graph, we often consider functions from the following functions spaces.
+
+\begin{definition}[Function spaces on metric graphs]
+  Let $\Gamma$ be a metric graph, the Hilbert space $L_2(\Gamma)$ is then the direct sum of the $L_2$ spaces on each edge of $\Gamma$. That is the set of all functions that are square integrable on each edge:
+  \[
+    L_2(\Gamma) = \bigoplus_{e \in E} L_2(e).
+  \]
+  Similarly we define the Sobolev space $W_2^2(\Gamma\setminus V)$ as the set of all square integrable functions with weak derivatives up to order 2 being square integrable:
+  \[
+    W_2^2(\Gamma\setminus V) = \bigoplus_{e \in E} W_2^2(e).
+  \]
+  Analogously we define $C^\infty_0(\Gamma\setminus V)$ as the set of smooth functions with support separated from the vertices of $\Gamma$.
+\end{definition}
+
+We will also need the notion of inner product between two functions on the graph.
+
+\begin{definition}[$L_2$ inner product and norm on metric graphs]\label{def: inner product on graph}
+  The $L_2$ inner product on a metric graph $\Gamma$ is given by
+  \[
+    \ip{f}{g}_{L_2(\Gamma)} =
+    \sum_{e \in E} \ip{f}{g}_{L_2(e)} =
+    \sum_{e \in E} \int_e f(x)\overline{g}(x)\,dx
+  \]
+  which we can write as $\int_\Gamma f(x)\overline{g}(x)\,dx$, where $\overline{z}$ denotes complex conjugation of $z$.
+  The $L_2(\Gamma)$ norm is then naturally defined by
+  \[
+    \norm{f}_{L_2(\Gamma)} = \ip{f}{f}_{L_2(\Gamma)} = \int_{\Gamma} \abs{f(x)}^2 dx.
+  \]
+\end{definition}
+
+These definitions are very natural generalizations of the same concepts on intervals of $\R$, further adding to the notion that metric graphs are merely sets of intervals of $\R$ that share some end-points.
+
+A function $f$ defined on $\Gamma$ is simply a function defined independently on each edge. This leads to the problem of $f(x_j)$ not being well defined where $x_j \in v$ for some vertex $v$. Points in $v$ are by definition identified as the same point but the definition of $f$ does not reflect this. If $f$ is continuous on each edge we can define $f(x_j)$ as
+\begin{align*}
+  f(x_{2n}) &= \lim_{x \to x_{2n}^-} f(x) \\
+  f(x_{2n-1}) &= \lim_{x \to x_{2n-1}^+} f(x),
+\end{align*}
+that is, the limits are taken as one-sided limits from the inside of the edge. Later we will consider functions continuous on the entire graph, in which case even $f(v)$ will be well defined.
+
+As we've seen it is natural to consider limits at a vertex as the one-sided limit taken from inside the edge. Motivated by this we introduce the following.
+
+\begin{definition}
+  The \emph{normal derivative} $\partial f(x_j)$ of a function $f$ on a metric graph $\Gamma$ at an end-point $x_j$ of an edge is given by
+  \begin{align}
+    \partial f(x_j) =
+    \begin{dcases}
+      \lim_{x \to x_j}   \Dop{x} f(x) & j = 2n-1 \\
+      \lim_{x \to x_j} - \Dop{x} f(x) & j = 2n
+    \end{dcases}
+  \end{align}
+\end{definition}
+
+This should be understood as taking the derivative in the direction into the edge, out from the vertex given by the end-point $x_j$. This is a useful concept since it allows us to disregard the direction of parametrization of the edge. For this graph it is indeed only the length of an edge that is of relevance, in section~\ref{sec: edge parametrization} we will consider how edge parametrization affects graphs in general.
+
+
+
+\section{Differential operators}\label{sec: differential operators}
+
+We now introduce the differential operator acting on function from the function space of the underlying metric graph. The differential operator can be seen as defining which phenomena is being studied on the graph. The most simple and common operator is the \emph{Laplace operator}
+\begin{equation}\label{eq: laplacian}
+  L = - \Dopn{x}{2}.
+\end{equation}
+Note that the domain of the operator must be carefully defined, as we shall see in section~\ref{sec: self-adjoint operators}, the domain plays a very important role for properties of the operator, such as self-adjointness. Until then, let us consider the simple case $\Dom L = C^2(\R)$, in order to get a preliminary understanding of the operators that will come into play. The eigenfunctions $u(x)$ of $L$, satisfying
+\[ Lu = \lambda u, \] are complex waves which can be written as
+\[ u(x) = Ae^{ikx} + Be^{-ikx}, \quad k^2 = \lambda. \]
+Solving the eigenvalue problem $Lu=\lambda u$ amounts to studying wave propagation through one-dimensional structures connected at the vertices, being the graph $\Gamma$. In order to do this properly we must define matching conditions at the vertices, as we shall do in section~\ref{sec: mc}.
+
+Because of the relation
+\[
+  Ae^{ikx} + Be^{-ikx} = C\cos kx + D\sin kx
+\]
+for complex constants $A, B, C$ and $D$ such that $C=A+B$ and $D=i(A-B)$, we can chose to represent the eigenfunctions of $L$ as complex exponentials or trigonometric functions. We will see that in different contexts one representation may be more convenient than the other. If one wants to emphasize the evenness or oddness of the eigenfunction, c.f.~\ref{ex: even odd eigenfunctions}, the trigonometric representation is superior. On the other hand the complex exponential form splits the eigenfunction into left and right traveling waves, c.f.~\ref{eq: left right waves}.
+
+More generally one introduces the \emph{Magnetic Schrödinger operator}
+\begin{equation}\label{eq: magnetic schrödinger operator}
+  L_{q,a} = \left(i\Dop{x} + a(x)\right)^2 + q(x)
+\end{equation}
+where $a(x)$ is the magnetic potential and $q(x)$ is the electric potential present on the graph. With no magnetic potential we denote $L_{q,0} = L_q$ simply as the \emph{Schrödinger operator}. Note also that $L_{0,0} = L$. The eigenfunctions of $L_{q,a}$ describe the stationary states of quantum mechanical particles on the graph under the influence of electric and magnetic potential. In particular, $L_q \psi = \lambda \psi$ is the standard time-independent Schrödinger equation, see \cref{sec: physical interpretation} for more details on the physical interpretation.
+
+Before we proceed we shall formalize the notion of operators and consider some of their properties.
+% We outline only the basics and important notions that will later be used. More information can be found in any book on functional analysis.
+
+
+\subsection{Operator formalism}
+
+Let us first recall that an operator $A$ is a mapping between two linear vector spaces $X$ and $Y$ with scalars in $\C$,
+\[ A : X \to Y. \]
+The operator is said to be linear if $A(\alpha x + \beta y) = \alpha A x + \beta A y$ where $x,y \in X$ and $\alpha, \beta \in \C$.
+We shall mostly be concerned with the case when $X$ and $Y$ are function spaces, such as the introduced Sobolev space $W_2^2(\Gamma\setminus V)$. In this case we write $(Af)(x)$, i.e. $A$ operates on a function $f \in X$ and gives a function $Af \in Y$, which in turn is applied to an element $x$ from the domain of functions in $Y$.
+Composition $(ABf)(x)$ of two operators $A$ and $B$ is to be understood as $A(B(f(x)))$.
+The following example shows how to work with operator expressions and that, in general, operators do not commutative.
+
+\begin{example}
+  Let $A$ and $B$ be two operators defined on the same function space, the equation
+  \[ A = B \]
+  should be understood as
+  \begin{enumerate}[i)]
+    \item $\Dom A = \Dom B$
+    \item $Af = Bf$ for every function $f$ in the domain.
+  \end{enumerate}
+  The importance of this is exemplified by considering the operators
+  \[ A = \Dop{x}, \quad B = g(x), \]
+  where $A$ is the derivative operator and $B$ is simply pointwise multiplication by a continuously differentiable function $g(x)$. Let the domain of both operators be $C^1(\R)$. It is not true that
+  \begin{equation*}
+    AB = \frac{d}{dx}g(x) = g'(x),
+  \end{equation*}
+  which is clear if we let $AB$ act on a function
+  \begin{align*}
+    (ABf)(x) &= \big(A(Bf)\big)(x) \\
+    &= \frac{d}{dx}\Big(g(x)f(x)\Big) \\
+    &= g'(x)f(x)+g(x)f'(x) \\
+    &= \left(g'(x)+g(x)\Dop{x}\right)f(x).
+  \end{align*}
+  That is,
+  \[ AB = g'(x)+g(x)\frac{d}{dx}, \]
+  which shows that caution must be exercised when dealing with operator expressions.
+  On the other hand we have
+  \[ (BAf)(x) = g(x)f'(x), \]
+  showing that
+  \[
+    BA = g(x)\Dop{x}
+  \]
+  In conclusion we have that the commutator between $A$ and $B$ is given by
+  \[
+    AB-BA = g'(x).
+  \]
+\end{example}
+
+We now state some important definitions.
+
+\begin{definition}[Bounded operator]
+  An operator $A: X \to Y$ is said to be \emph{bounded} if there exists a constant $C$ such that
+  \[
+    \norm{Ax} \le C \norm{x} \quad \forall x\in X.
+  \]
+  Furthermore, the infimum over all such constants $C$ is called the \emph{norm} of $A$, denoted by $\norm{A}$. If no such $C$ exists, we say that $A$ is unbounded.
+\end{definition}
+
+\begin{definition}[Isometric operator]
+  An operator $A: X \to Y$ is said to be \emph{isometric (norm preserving)} if
+  \[ \norm{Ax}_Y = \norm{x}_X \quad \forall x \in X. \]
+\end{definition}
+
+\begin{definition}[Unitary operator]
+  An operator $A: X \to Y$ is said to be \emph{unitary} if it is defined on the whole space $X$, is isometric and surjective. In particular this gives that $A$ is invertible and
+  \[ AA^* = A^*A = I. \]
+\end{definition}
+
+To properly define an operator $L: X \to Y$, its domain $\Dom(L) \subseteq Y$ must be specified. As it turns out, the domain of an operator plays a very important role for the properties of the operator.
+
+\begin{example}[Shift operator]
+  Consider the space $\ell^2$ consisting of all infinite sequences $\vec{x}=(x_1, x_2, \ldots)$ with
+  \[
+    \norm{\vec{x}}_2 = \sqrt{\sum_{n=1}^{\infty} \abs{x_n}^2} < \infty.
+  \]
+  Define the \emph{shift operator} $S$ on $\ell^2$ by
+  \[
+    S(x_1, x_2, \ldots) = (0, x_1, x_2, \ldots).
+  \]
+  Clearly $S$ is an isometry, the norm of $\vec{x}$ is preserved for every $\vec{x} \in \ell^2$:
+  \[
+    \norm{S(\vec{x})}
+    = \norm{(0,x_1,x_2,\ldots)}
+    = \sqrt{\sum_{n=1}^{\infty} \abs{x_n}^2 }
+    = \norm{(x_1, x_2, \ldots)}
+    = \norm{\vec{x}}.
+  \]
+  However, $\Ran S \ne \ell^2$ since any element $\vec{x} = (x_1, x_2, \ldots)$ with $x_1 \ne 0$ is not contained in $\Ran S$. Hence, the shift operator $S$ is not surjective and thus not unitary.
+\end{example}
+
+
+
+
+\subsection{Self-adjoint, symmetric and hermitian operators}\label{sec: self-adjoint operators}
+
+\begin{quote}\itshape
+  ``In the 1960s Friedrichs met Heisenberg, and used the occasion to express to him the deep gratitude of the community of mathematicians for having created quantum mechanics, which gave birth to the beautiful theory of operators in Hilbert space. Heisenberg allowed that this was so; Friedrichs then added that the mathematicians have, in some measure, returned the favor. Heisenberg looked noncommittal, so Friedrichs pointed out that it was a mathematician, von Neumann, who clarified the difference between a self-adjoint operator and one that is merely symmetric. `What's the difference', said Heisenberg.'' \normalfont\cite[p.~414]{lax}
+\end{quote}
+
+As the quote above indicates, there is often confusion regarding the concepts of self-adjoint, symmetric and hermitian operators. The topic of functional analysis, operator theory and in particular unbounded self-adjoint operators is deep, and we shall only touch upon the topics directly related to the study of quantum graphs, further details can be found in \cite{teschl-fa, teschl-schroe, schmudgen}. What is presented below is mainly taken from \cite[section 1.2]{schmudgen} and \cite[section 5.1]{pedersen}. Recall first that a Hilbert space is a complete inner-product space.
+% The difficulty arises when the operator is unbounded, which also is the most interesting case since the operators $L_{q,a}$ we are working with are unbounded operators.
+
+Let $\H_1$ and $\H_2$ be Hilbert spaces and let $T$ be a linear operator from $\H_1$ to $\H_2$ such that the domain $\Dom T$ is a linear subspace that is dense in $\H_1$, that is $\overline{\Dom T} = \H_1$ where $\overline{\Dom T}$ denotes the closure of $\Dom T$. Set
+\[
+  \Dom T^* = \{y \in \H_1 \mid \text{the functional } x \mapsto \ip{Tx}{y}_2 \text{ on } \Dom T \text{ is bounded} \}.
+\]
+Since $\Dom T$ is dense in $\H_1$, the functional $x \mapsto \ip{Tx}{y}_2$ extends by continuity to $\H_1$ (a linear functional is bounded if and only if it is continuous \cite[theorem 4.4.2]{friedman}). By Riesz's theorem \cite[theorem 6.2.4]{friedman} there exists a unique element $z \in \H_1$ such that $\ip{Tx}{y}_2 = \ip{x}{z}_1$. Hence we can set $T^*y = z$ to obtain a well-defined mapping $T^*$ from $\H_1$ to $\H_2$, and we have
+\begin{equation}\label{eq: adjoint symmetric relation}
+  \ip{Tx}{y}_2 = \ip{x}{T^*y}_1 \quad \forall x \in \Dom T, \; y \in \Dom T^*.
+\end{equation}
+
+\begin{definition}[Adjoint operator]
+  Let $T$ be a densely defined linear operator from $\H_1$ to $\H_2$, both being Hilbert spaces.
+  The operator $T^*$ as described above is called the \emph{adjoint} operator of $T$.
+\end{definition}
+
+If $S$ and $T$ are two linear operators from $\H_1$ to $\H_2$ we say that $S = T$ if and only if their domains coincide, i.e.\ $\Dom S = \Dom T$, and additionally $S(x) = T(x)$ for all $x$ in the domain. If $\Dom S \subseteq \Dom T$, and if the operators agree on the common domain, that is $S(x) = T(X)$ for all $x \in \Dom S$, then we say that $S$ is a restriction of $T$ or equivalently that $T$ is an extension of $T$, and write $S \subseteq T$.
+
+\begin{definition}[Symmetric operator]
+  Let $T$ be a densely defined linear operator on a Hilbert space, then $T$ is called \emph{symmetric} if $T \subseteq T^*$.
+\end{definition}
+
+\begin{definition}[Self-adjoint operator]
+  Let $T$ be a densely defined linear operator on a Hilbert space, then $T$ is called \emph{self-adjoint} if $T = T^*$.
+\end{definition}
+
+% \begin{definition}[Symmetric operator]
+%   An operator $T$ defined on a Hilbert $\H$ space is called symmetric if
+%   \[
+%     \ip{Tx}{y} = \ip{x}{Ty} \quad \text{ for all } x, y \in \Dom(T) \subseteq \H.
+%   \]
+% \end{definition}
+
+% \begin{definition}[Adjoint]
+%   Let $T$ and $T^*$ be operators on a Hilbert space $\H$ space such that
+%   \begin{equation*}
+%     \ip{Tx}{y} = \ip{x}{T^*y} \quad \text{ for all } x, y \in \H,
+%   \end{equation*}
+%   then $T^*$ is called the \emph{adjoint} of $T$. If $T$ is everywhere defined and in particular $T=T^*$ we say that $T$ is self-adjoint.
+% \end{definition}
+
+
+The definition of Hermitian operators is not as well standardized, often it is used interchangeably with symmetric or self-adjoint operators. Sometimes it is only used for finite-dimensional spaces where the matrix representation of the adjoint of an operator $A$ equals the hermitian conjugate of the matrix representation of $A$.
+
+Some important properties of self-adjoint operators are that the eigenvalues are always real \cite[p.~16]{ballentine} and eigenvectors corresponding to distinct distinct eigenvalues can always be chosen to be orthogonal \cite[p.~17]{ballentine}.
+
+Note that in the above definitions, the condition that $\Dom T$ is dense in $\H$ along with the uniqueness of Riesz's theorem is necessary to conclude that the adjoint operator $T^*$ of $T$ is unique.
+% Indeed, if $\overline{\Dom T} \ne \H$ then $\ip{Tx,y} = \ip{x,T^*y} = \ip{x,T^*y+w}$, where $w$ is any element orthogonal to
+
+\exclude{
+The following example illustrates the relation between symmetric and self-adjoint operators.
+
+\begin{example}\label{ex: self-adjoint example 1}
+  Let $L = -\Dopn{x}{2}$ and let the domain of $L$ be
+  \[
+    \Dom L = \{u \in L_2([0, \infty)): u(0) = u'(0) = 0 \}.
+  \]
+  We now verify that $L$ is symmetric by partial integration:
+  \begin{align*}
+    \ip{Lu}{v}
+    &= \int_{0}^{\infty} (Lu)(x)\overline{v(x)} dx \\
+    &= \int_{0}^{\infty} (-u''(x))\overline{v(x)} dx \\
+    &= \int_{0}^{\infty} u'(x)\overline{v'(x)} dx - \left[u'(x)\overline{v(x)}\right]_{0}^{\infty} \\
+    &= \int_{0}^{\infty} u(x)(-\overline{v''(x)}) dx + \left[u(x)\overline{v'(x)} - u'(x)\overline{v(x)}\right]_{0}^{\infty}.
+  \end{align*}
+  Note that the final integral is precisely $\ip{u}{Lu}$ and since the functions are square integrable they must vanish for $x\to\infty$, thus we get
+  \[
+    \ip{Lu}{v} = \ip{u}{Lv} - u(0)\overline{v'(0)} + u'(0)\overline{v(0)}.
+  \]
+  The boundary terms $-u(0)\overline{v'(0)} + u'(0)\overline{v(0)}$ vanish by the assumption on $\Dom L$, namely that the functions $u$ satisfy $u(0) = u'(0) = 0$.
+  The domain of $L^*$ is the set of all $v \in L_2$ for which $L^*$ is a bounded linear functional. Since we have $u(0)=u'(0)=0$, we must have $v(0)=v'(0)=0$ for otherwise $L^*$ would be unbounded since
+
+  This is given by the set of all $v \in L_2$ for which the boundary terms vanish, so that
+  \[
+    \ip{Lu,v} = {u,L^*v} \quad \forall x \in \Dom T, \; y \in \Dom T^*,
+  \]
+  c.f.\ equation \eqref{eq: adjoint symmetric relation}. As we see from the above calculation, we do not need to put any additional constraints on the functions $v$, the boundary terms vanish by definition of $\Dom L$. Hence we have $\Dom L \subset \Dom L^*$, that is $L \subset L^*$ showing that $L$ is symmetric but not self-adjoint.
+\end{example}
+
+\begin{example}
+  Consider again $L = -\Dopn{x}{2}$ but with the domain of $L$ given by
+  \[
+    \Dom L = \{u \in L_2([0, \infty)) : u'(0) = h u(0) \},
+  \]
+  for fixed $h\in\C$.
+  By similar calculations as in example~\ref{ex: self-adjoint example 1} we have
+  \begin{align*}
+    \ip{Lu}{v} = \int_{0}^{\infty} u(x)(-\overline{v''(x)} dx + u(0)\overline{v'(0)} - u'(0)\overline{v(0)}
+  \end{align*}
+  where the boundary terms can be written as
+  \begin{align*}
+    u(0)\overline{v'(0)} - u'(0)\overline{v(0)} = u(0) \g{\overline{v'(0)}-h\overline{v(0)}}.
+  \end{align*}
+  The boundary terms vanish for all $u$ and $v$ if and only if
+  \begin{equation}\label{eq: self-adjoint example 2 boundary terms}
+    \overline{v'(0)} = h\overline{v(0)} \iff v'(0) = \overline{h} v(0).
+  \end{equation}
+  That is, the domain of $L^*$ is
+  \[
+    \Dom L^* = \{ v \in L_2([0,\infty]) : v'(0) = \overline{h} v(0). \}
+  \]
+  Hence we see that the domains of $L$ and $L^*$ coincide if and only if $h \in \R$, that is $L$ is self-adjoint if and only if $h\in\R$.
+\end{example}
+}
+
+
+We now leave the general discussion of self-adjoint operators and return to the context of quantum graphs. Introduce $L^\text{min}$ as the operator associated with the differential expression $L = -\Dopn{x}{2}$ having the minimal domain $\Dom(L^\text{min}) = C^\infty_0(\Gamma\setminus V)$. Similarly, the maximal operator $L^\text{max}$ has the largest domain for which functions $u$ in the domain still lie in the domain after operating with $L$ on $u$. Hence $\Dom(L^\text{max}) = W^2_2(\Gamma\setminus V)$ and we see that $\Dom(L^\text{min}) \subset \Dom(L^\text{max})$.
+
+Let us consider under which conditions any operator $L$ associated with the differential expression $L=-\Dopn{x}{2}$ is symmetric.
+\begin{equation}\label{eq:self-adjoint_boundary_terms}
+  \begin{aligned}
+    \ip{Lu}{v}_{L_2(e)}
+    &= \sum_{e_n \in E} \int_{e_n} (-u'')\overline{v}\,dx \\
+    &= \sum_{e_n \in E} \int_{e_n} u'\overline{v}' dx - \Big[u'\overline{v}\Big]_{x_{2n-1}}^{x_{2n}} \\
+    &= \sum_{e_n \in E} \int_{e_n} u(-\overline{v}'') dx + \Big[u\overline{v}' - u'\overline{v}\Big]_{x_{2n-1}}^{x_{2n}} \\
+    &= \ip{u}{Lu} + \sum_{e_n \in E} \Big[u\overline{v}' - u'\overline{v}\Big]_{x_{2n-1}}^{x_{2n}} \\
+    &= \ip{u}{Lu} + \sum_{m=1}^{M} \sum_{x \in v_m} \partial u(x)\overline{v}(x) - u(x)\partial\overline{v}(x)
+  \end{aligned}
+\end{equation}
+For $L^\text{min}$ the boundary terms $\partial u(x)\overline{v}(x) - u(x)\partial\overline{v}(x)$ necessarily vanish since by definition every function in $\Dom(L^\text{min})$ vanishes at the endpoints. This shows that the minimal operator is symmetric. Similarly, the maximal operator $L^\text{max}$ is not symmetric, since because of its greater domain we no longer have that the boundary terms vanish.
+
+It can be shown that the maximal operator is the adjoint of the minimal operator and by using extension theory of symmetric operators one can show that $L$ can be made self-adjoint by restricting the domain of $L^\text{max}$ so that the boundary terms in \ref{eq:self-adjoint_boundary_terms} sum up to zero.
+
+The extension theory of operators is beyond the scope of this text, we merely note that the domain of the self-adjoint restriction has a domain that contains $C^\infty_0(\Gamma)$ and is included in $W^2_2(\Gamma)$, and that it satisfies certain conditions at the vertices so that the boundary terms in \ref{eq:self-adjoint_boundary_terms} vanish. It is precisely these conditions that are the matching conditions, and through these conditions the geometry of the graph is reflected by the operator. This will be considered further in section~\ref{sec: mc}.
+
+
+
+\subsection{The spectrum}\label{sec: spectrum}
+
+When studying quantum graphs one is often interested in finding the eigenvalues $\lambda$ and the corresponding eigenfunctions $u$ for the operator $L$ defined for functions on the graph. That is, $\lambda$ and $u$ satisfying the eigenvalue equation
+\[ Lu = \lambda u. \]
+The physical importance of this is discussed in \cref{sec: physical interpretation}. We call the set of all such $\lambda$ the \emph{spectrum} of $L$. Similar to the theory of eigenvalues for matrices in the finite dimensional case, the spectrum are given by all $\lambda$ such that the resolvent $(L-\lambda I)^{-1}$ does not have a bounded inverse.
+
+In the theory of infinite dimensional spaces, the situation is more delicate. The spectrum of an operator can be divided into three parts, the discrete spectrum (or point spectrum), the continuous spectrum and the residual spectrum. In particular, the discrete spectrum corresponds to quantum states bound by a potential, and the continuous spectrum corresponds to unbound quantum states, particles propagating freely.
+% On quantum graphs these phenomena are obtained for compact graphs (graphs with no semi-infinite edges) and for infinite graphs, respectively.
+
+
+
+\section{Matching conditions}\label{sec: mc}
+
+As we saw in the previous section, the purpose of the matching conditions are to make sure that boundary terms in \eqref{eq:self-adjoint_boundary_terms} vanish, so that the operator symmetric is symmetric, that is
+\begin{equation}\label{eq: mc boundary terms}
+  \ip{Lu}{v} - \ip{u}{Lv} = \sum_{m=1}^{M} \sum_{x \in v_m} \partial u(x)\overline{v}(x) - u(x)\partial\overline{v}(x) = 0.
+\end{equation}
+Furthermore one requires the matching conditions to be local, in the sense that only limit values of functions in the same vertex are related, i.e.\ each inner sum in \eqref{eq: mc boundary terms} vanishes. It is sometimes convenient to distinguish between matching conditions, defined for inner vertices, that is, vertices of degree $\ge$ 2, and boundary conditions, defined for outer vertices, that is, vertices of degree 1, alltogether they are referred to as vertex conditions. We will use matching conditions synonymously with vertex conditions when there is no need for such a distinction.
+
+% The matching conditions at a vertex can be be characterized in full generality via scattering matrices at the given vertex. This is somewhat outside the scope of this text and can be found in  \cite{pavel book} and \cite{berkolaiko kuchment book}.
+
+% \todo{?}Present the general characterization of MC for star graph via matrices A and B and also via the scattering matrix. Or just cite \cite{berkolaiko kuchment book} and \cite{pavel book} since this is somewhat outside the scope of this text.
+
+We define the \emph{standard matching conditions}, for a vertex $v$ in the graph, as
+\begin{equation}
+  \begin{dcases}
+    u(x) = u(y) \text{ for all } x, y \in v \\
+    \sum_{x \in v} \partial u(x) = 0.
+  \end{dcases}
+\end{equation}
+% These conditions are standard in the sense that any wave, in particular the wave function of a quantum state (cf.\ \cref{sec: physical interpretation}), should be continuous, the first condition, making $u(v)$ well defined. The second condition states that the wave is ``conserved'' at each vertex, the wave does not dissipate at the vertex.
+
+% We will also talk of \emph{Dirichlet conditions} at a vertex, requiring the eigenfunction $u$ to take some given value, most often zero, while imposing no condition on the derivative $\partial u$. Furthermore we have the \emph{Neumann conditions}, in some sense playing a dual role of the Dirichlet condition. The normal derivative $\partial u(x)$ is required to take some given value, most often zero, while the function value $u$ at the given vertex is unspecified. These matching conditions come into play through some examples in section~\ref{sec: physical interpretation mc}.
+
+\begin{example}[Removal of vertices of degree 2]\label{ex: remove vertex smc}
+  For a quantum graph $\Gamma$, any vertex $v$ of degree 2 with standard matching conditions can be added or removed without altering the functions on the graph in any way. Removing such a vertex $v$ should be understood in the sense that two edges joined by $v$ is be replaced by one edge with length equal to the sum of the lengths of the two edges being replaced, and conversely for adding an edge.
+
+  This follows from that the condition imposed by the standard matching conditions at $v$ simply require the function and its derivative to be continuous, indeed
+  \[ \sum_{x\in v} \partial u(x) = 0 \]
+  can be written as
+  \[ \Dop{x} u(x_j) = \Dop{x} u(x_{j+1}) \]
+  where $x_j$ and $x_{j+1}$ are the two end-points in $v$. This also illustrates the benefit of working with normal derivatives, we did not need to consider the parametrization of the edges. Now, this condition is actually satisfied at any point in the graph, thus also at $v$, for all functions in the domain $\Dom(L) = W^2_2(\Gamma \setminus V)$. In particular it can be shown that the first order derivatives of $W^2_2$ are Hölder continuous due to the Sobolev embedding theorem to Hölder spaces \cite{adams sobolev spaces}. Hence, the spectral properties of $\Gamma$ are completely invariant when adding or removing such vertices when standard matching conditions are used.
+\end{example}
+
+There are many possible matching conditions, they are often introduced to reflect the physics of the graph, which we discuss further in section~\ref{sec: physical interpretation mc}. Furthermore, quantum graphs with complicated or unwieldy underlying metric graphs can sometimes be studied via a simpler graph with special matching conditions that reflect the structure of the original graph. This technique will come to play a central role in chapter~\ref{sec: snowflake}.
