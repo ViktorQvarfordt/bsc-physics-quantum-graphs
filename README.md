@@ -2,4 +2,4 @@
 
 Bachelor's thesis in physics.
 
-[PDF](http://viktorq.se/quantum-snowflake/latex/snowflake.pdf)
+[PDF](https://viktorqvarfordt.github.io/quantum-snowflake/latex/snowflake.pdf)
